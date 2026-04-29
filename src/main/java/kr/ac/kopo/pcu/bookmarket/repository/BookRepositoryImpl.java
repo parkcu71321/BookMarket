@@ -16,7 +16,7 @@ public class BookRepositoryImpl implements BookRepository {
         book1.setName("스프링 부트 완전정복");
         book1.setDescription("스프링 부트는 스프링을 기반으로 쉽고 빠르게 웹 애플리케이션을 개발할 수 있는 도구이다. 이 책에서는 스프링 부트의 기본 개념을 쉽게 이해하고 다양한 실습 예제로 빠르게 익힐 수 있다. 그리고 단계별 실습을 따라 하다 보면 도서 쇼핑몰 구축 프로젝트를 완성할 수 있다. 개념-실습-프로젝트의 3단계 학습으로 스프링 부트를 제대로 익힌다면 개발 시간을 단축하고 생산성을 높일 수 있는 개발자로 성장할 수 있다.");
         book1.setPublisher("길벗캠퍼스");
-        book1.setCategory("IT전문서");
+        book1.setCategory("IT전문서,IT교육교재");
         book1.setAuthor("송미영");
         book1.setUnitPrice(new BigDecimal(35000));
         book1.setReleaseDate("2024/12/31");
@@ -105,5 +105,10 @@ public class BookRepositoryImpl implements BookRepository {
         booksByCategory.retainAll(booksByPublisher);
 
         return booksByCategory;
+    }
+
+    @Override
+    public void setNewBook(Book book) {
+        listOfBooks.add(book);
     }
 }
