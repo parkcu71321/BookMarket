@@ -9,10 +9,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
+import jakarta.validation.Valid;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -59,12 +60,16 @@ public class BookController {
     }
 
     @GetMapping("/add")
-    public String requestAddBookForm(){
+    public String requestAddBookForm(Model model){
+        model.addAttribute("book", new Book());
         return "addBook";
     }
 
     @PostMapping("/add")
-    public String submitAddNewBook(@ModelAttribute Book book){
+    public String submitAddNewBook(@Valid @ModelAttribute Book book, BindingResult bindingResult){
+        if (bindingResult.hasErrors())
+            return "addBook";
+
         MultipartFile bookImage = book.getBookImage();
         System.out.println("파일사이즈" + bookImage.getSize());
         String saveName = bookImage.getOriginalFilename();
