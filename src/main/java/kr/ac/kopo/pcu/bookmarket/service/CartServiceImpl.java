@@ -1,4 +1,4 @@
-package kr.ac.kopo.pcu.bookmarket.service;
+package kr.ac.kopo.minn.bookmarket.service;
 
 import kr.ac.kopo.pcu.bookmarket.domain.Cart;
 import kr.ac.kopo.pcu.bookmarket.repository.CartRepository;
@@ -18,5 +18,10 @@ public class CartServiceImpl implements CartService{
     @Override
     public Cart read(String cartId) {
         return cartRepository.read(cartId);
+    }
+
+    @Override
+    public void update(String cartId, Cart cart) {
+        cartRepository.update(cartId, cart);
     }
 }
